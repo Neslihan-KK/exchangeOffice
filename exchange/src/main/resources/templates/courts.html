@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Hukuk Modülü</title>
+    <!-- CSS -->
+    <link href="../css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" rel="stylesheet"/>
+    <link href="../css/starter-template.css" th:href="@{/css/starter-template.css}" rel="stylesheet"/>
+
+    <script type="text/javascript" src="../jquery/jquery.min.js"></script>
+    <script type="text/javascript" src="../js/bootstrap.min.js"></script>
+
+</head>
+<body>
+<div class="container">
+    <!--/*/ <th:block th:include="index :: header"></th:block> /*/-->
+    <table class="table table-striped ">
+        <tr>
+            <th>No</th>
+            <th>Adı</th>
+            <!--<th>Tipi</th>
+            <th>Alt Tipi</th>-->
+            <th>İl</th>
+            <th>İlçe</th>
+            <th>Adres</th>
+            <th>Son Tarihi</th>
+            <th>Güncelle</th>
+            <th>Sil</th>
+        </tr>
+        <tr th:each="court, iterationStatus : ${courts}">
+            <td th:text="${court.courtId}">No</td>
+            <td th:text="${court.courtName}">Name</td>
+            <td th:text="${court.lookup.lookupValue}">mainType</td>
+            <td th:text="${court.lookup1.lookupValue}">type</td>
+            <td th:text="${court.cityDistrict.cityName}">city</td>
+            <td th:text="${court.cityDistrict.districtName}">district</td>
+            <td th:text="${court.address}">address</td>
+            <td th:text="${court.endDate}">end_date</td>
+            <td><a th:href="${'/court/edit/' + court.courtId}">Güncelle</a></td>
+            <td><a th:href="${'/court/delete/' + court.courtId}">Sil</a></td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Currency Exchange Rate</title>
+    <!-- CSS -->
+    <link href="css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" rel="stylesheet"/>
+    <link href="css/starter-template.css" th:href="@{/css/starter-template.css}" rel="stylesheet"/>
+
+    <script type="text/javascript" src="jquery/jquery.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+
+</head>
+<body>
+<div class="container">
+    <!--/*/ <th:block th:include="index :: header"></th:block> /*/-->
+    <div style="width: 550px; margin-bottom: 20px;" align="center">
+        <h3>Currency Exchange Rate Live</h3>
+    </div>
+    <div class="col-sm-12" align="center" style="margin-top: 20px;">
+    <form class="form-horizontal" th:object="${exchangeRatesSearch}" th:action="@{/searchLive}" method="post">
+        <div class="form-group">
+            <label class="col-sm-2 control-label">From Currency:</label>
+            <div class="col-sm-3">
+                <select class="form-control" placeholder="Select Currency" th:field="*{fromCurrency}" name="fromCurrency" id="fromCurrency" required="true">
+                    <option value=""></option>
+                    <option th:each="currency : ${currencyList}"
+                            th:value="${currency.currency}"
+                            th:text="${currency.currency+'   '+currency.currencyLabel}"></option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">To Currency:</label>
+            <div class="col-sm-3">
+                <select class="form-control" placeholder="Select Currency" th:field="*{toCurrency}" name="toCurrency" id="toCurrency" required="true">
+                    <option value=""></option>
+                    <option th:each="currency : ${currencyList}"
+                            th:value="${currency.currency}"
+                            th:text="${currency.currency+'   '+currency.currencyLabel}"></option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label"></label>
+            <div class="col-sm-3">
+                <button type="submit" class="btn btn-primary">Search</button>
+            </div>
+        </div>
+        <div class="form-group" style="margin-top: 20px;">
+            <label class="col-sm-2 control-label">Exchange Rate:</label>
+            <div class="col-sm-2">
+                <p class="form-control-static" style="font-weight: bold; font-size: large" th:text="*{exchangeRate}"/>
+            </div>
+        </div>
+    </form>
+    </div>
+</div>
+</body>
+</html>
